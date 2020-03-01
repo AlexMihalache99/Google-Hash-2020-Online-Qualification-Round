@@ -15,7 +15,7 @@ The individual scores were :
 * f_libraries_of_the_world : **2,973,389**
 
 After the competiion, in the Extended Round, I have improved our solution and managed to get **26.581.754**. You can see the optimization in the **OptimizedWorld** class.
-The new scores were :
+The new scores are :
 * d_tough_choices : **5,028,010**
 * e_so_many_books : **5,034,497**
 * f_libraries_of_the_world : **5,227,905**
