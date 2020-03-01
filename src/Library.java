@@ -7,7 +7,8 @@ import java.util.Comparator;
  * 
  * @author Alexandru Mihalache, Vlad Stejeroiu
  * @author Victor Ciobanu, Andrei Predi
- * @version 1.0 - no copyright.
+ * @version 2.0 - no copyright.
+ * Modified by @author Alexandru Mihalache
  */
 public class Library {
 
@@ -16,11 +17,11 @@ public class Library {
 	int signUp;
 	int nrShips;
 	int ID;
-	long score;
+	ArrayList<Integer> chosenBooks;
+	int daysLeft;
 
 	/**
-	 * Comparator to perform a descending order 
-	 * of books by their scores.
+	 * Comparator to perform a descending order of books by their scores.
 	 */
 	class SortbyBookScore implements Comparator<Integer> {
 		public int compare(Integer a, Integer b) {
@@ -44,6 +45,39 @@ public class Library {
 		this.nrShips = nrShips;
 		this.ID = ID;
 		Collections.sort(books, new SortbyBookScore());
+		this.chosenBooks = new ArrayList<Integer>();
+		this.daysLeft = OptimizedWorld.days;
 	}
+	
+	/**
+	 * The maximum score the library l can get.
+	 * @param l the library for which we calculate the score.
+	 * @return the score.
+	 */
+	static public int getScore(Library l) {
+		int score = 0;
 
+		for (Integer i : l.books) {
+			score += scores[i];
+		}
+		return score;
+	}
+	
+	/**
+	 * The maximum score the library l can get
+	 * in the time remaining for sign ups. 
+	 * @param l the library for which we calculate the score.
+	 * @return the score.
+	 */
+	static public int getScore1(Library l) {
+
+		int numBooksScanned = (l.signUp < l.daysLeft) ? (l.daysLeft - l.signUp) * l.nrShips : 0;
+		int score = 0;
+
+		for (int i = 0; i < numBooksScanned && i < l.books.size(); i++) {
+			score += scores[l.books.get(i)];
+		}
+
+		return score / l.signUp;
+	}
 }
